@@ -4,5 +4,6 @@
     <VuMark name="Command" size="17.0 17.0" />
     <VuMark name="Command_Turn" size="17.0 17.0" />
     <VuMark name="Conditional" size="17.0 17.0" />
+    <VuMark name="Base" size="17.0 17.0" />
     </Tracking>
 </QCARConfig>

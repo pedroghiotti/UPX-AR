@@ -16,5 +16,9 @@
             <Shape bbox2D="0 0 80 80" origin="40 40" />
             <Code IDlength="12" IDtype="numeric" MaxID="4095" />
         </VuMark>
+    <VuMark name="Base" previewImage="f547db6b1f89467ea63ca5990075507f_preview.png" targetId="f547db6b1f89467ea63ca5990075507f" version="9.0">
+            <Shape bbox2D="0 0 80 80" origin="40 40" />
+            <Code IDlength="12" IDtype="numeric" MaxID="4095" />
+        </VuMark>
     </TargetSet>
 </VuforiaUnityInfo>
