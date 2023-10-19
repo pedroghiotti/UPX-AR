@@ -55,13 +55,15 @@
     <Analyzer Include="C:\Users\Arq\Desktop\Unity\Editor Versions\2022.3.4f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Game Logic\Commands\Cmd_Turn.cs" />
-    <Compile Include="Assets\Scripts\Game Logic\CommandManager.cs" />
-    <Compile Include="Assets\Scripts\Game Logic\Commands\Cmd_Forward.cs" />
-    <Compile Include="Assets\Scripts\MISC\Billboard.cs" />
-    <Compile Include="Assets\Scripts\Animation\AnimateHighlight.cs" />
-    <Compile Include="Assets\Scripts\Game Logic\Commands\Cmd_Conditional.cs" />
-    <Compile Include="Assets\Scripts\Game Logic\Commands\Command.cs" />
+    <Compile Include="Assets\src\Scripts\Game Logic\Commands\Command.cs" />
+    <Compile Include="Assets\src\Scripts\Game Logic\Commands\Cmd_Conditional.cs" />
+    <Compile Include="Assets\src\Scripts\Game Logic\Commands\Cmd_Queue.cs" />
+    <Compile Include="Assets\src\Scripts\Animation\AnimateHighlight.cs" />
+    <Compile Include="Assets\src\Scripts\Game Logic\Commands\Cmd_Turn.cs" />
+    <Compile Include="Assets\src\Scripts\Game Logic\Commands\Cmd_Forward.cs" />
+    <Compile Include="Assets\src\Scripts\Game Logic\CommandManager.cs" />
+    <Compile Include="Assets\src\Scripts\MISC\Billboard.cs" />
+    <Compile Include="Assets\src\Scripts\Game Logic\Commands\CommandData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\StreamingAssets\Vuforia\UPX.xml" />

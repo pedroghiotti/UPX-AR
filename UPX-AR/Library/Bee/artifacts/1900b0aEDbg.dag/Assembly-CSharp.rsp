@@ -361,13 +361,15 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/VuforiaScripts.ref.dll"
 -analyzer:"C:/Users/Arq/Desktop/Unity/Editor Versions/2022.3.4f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Users/Arq/Desktop/Unity/Editor Versions/2022.3.4f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
-"Assets/Scripts/Animation/AnimateHighlight.cs"
-"Assets/Scripts/Game Logic/CommandManager.cs"
-"Assets/Scripts/Game Logic/Commands/Cmd_Conditional.cs"
-"Assets/Scripts/Game Logic/Commands/Cmd_Forward.cs"
-"Assets/Scripts/Game Logic/Commands/Cmd_Turn.cs"
-"Assets/Scripts/Game Logic/Commands/Command.cs"
-"Assets/Scripts/MISC/Billboard.cs"
+"Assets/src/Scripts/Animation/AnimateHighlight.cs"
+"Assets/src/Scripts/Game Logic/CommandManager.cs"
+"Assets/src/Scripts/Game Logic/Commands/Cmd_Conditional.cs"
+"Assets/src/Scripts/Game Logic/Commands/Cmd_Forward.cs"
+"Assets/src/Scripts/Game Logic/Commands/Cmd_Queue.cs"
+"Assets/src/Scripts/Game Logic/Commands/Cmd_Turn.cs"
+"Assets/src/Scripts/Game Logic/Commands/Command.cs"
+"Assets/src/Scripts/Game Logic/Commands/CommandData.cs"
+"Assets/src/Scripts/MISC/Billboard.cs"
 -langversion:9.0
 
 /deterministic
