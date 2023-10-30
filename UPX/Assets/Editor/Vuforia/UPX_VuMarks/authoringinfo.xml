@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<VuforiaUnityInfo>
+    <TargetSet toolVersion="" version="6.0"><VuMark name="CommandId" previewImage="a90291c6788e4538b70e3b58a20c53bf_preview.png" targetId="a90291c6788e4538b70e3b58a20c53bf" version="9.0">
+            <Shape bbox2D="0 0 80 80" origin="40 40" />
+            <Code IDlength="12" IDtype="numeric" MaxID="4095" />
+        </VuMark>
+    <VuMark name="Command" previewImage="2f0734f2cc7349e88eb803f4b06edeb3_preview.png" targetId="2f0734f2cc7349e88eb803f4b06edeb3" version="9.0">
+            <Shape bbox2D="0 0 80 80" origin="40 40" />
+            <Code IDlength="12" IDtype="numeric" MaxID="4095" />
+        </VuMark>
+    <VuMark name="Command_Turn" previewImage="37b02074b3e0490a8e84f8d05163d765_preview.png" targetId="37b02074b3e0490a8e84f8d05163d765" version="9.0">
+            <Shape bbox2D="0 0 80 80" origin="40 40" />
+            <Code IDlength="12" IDtype="numeric" MaxID="4095" />
+        </VuMark>
+    <VuMark name="Conditional" previewImage="ec296d16d4994b65ade2d3607d283e13_preview.png" targetId="ec296d16d4994b65ade2d3607d283e13" version="9.0">
+            <Shape bbox2D="0 0 80 80" origin="40 40" />
+            <Code IDlength="12" IDtype="numeric" MaxID="4095" />
+        </VuMark>
+    <VuMark name="Base" previewImage="f547db6b1f89467ea63ca5990075507f_preview.png" targetId="f547db6b1f89467ea63ca5990075507f" version="9.0">
+            <Shape bbox2D="0 0 80 80" origin="40 40" />
+            <Code IDlength="12" IDtype="numeric" MaxID="4095" />
+        </VuMark>
+    </TargetSet>
+</VuforiaUnityInfo>

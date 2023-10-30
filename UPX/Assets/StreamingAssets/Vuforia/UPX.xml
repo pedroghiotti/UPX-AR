@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="Forward_3" size="17.000000 17.000000" />
+    <ImageTarget name="Forward_2" size="17.000000 17.000000" />
+    <ImageTarget name="Forward" size="17.000000 17.000000" />
+    <ImageTarget name="Unity-logo" size="17.000000 9.562500" />
+    <ImageTarget name="Darkspear" size="17.000000 25.103333" />
+    <ImageTarget name="Aklys" size="17.000000 24.650000" />
+    <ImageTarget name="Javelin" size="17.000000 24.650000" />
+    <ImageTarget name="Brandistock" size="17.000000 25.160000" />
+  </Tracking>
+</QCARConfig>
