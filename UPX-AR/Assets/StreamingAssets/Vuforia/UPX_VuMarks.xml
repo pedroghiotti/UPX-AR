@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<QCARConfig>
-    <Tracking><VuMark name="CommandId" size="17.0 17.0" />
-    <VuMark name="Command" size="17.0 17.0" />
-    <VuMark name="Command_Turn" size="17.0 17.0" />
-    <VuMark name="Conditional" size="17.0 17.0" />
-    <VuMark name="Base" size="17.0 17.0" />
-    </Tracking>
-</QCARConfig>
