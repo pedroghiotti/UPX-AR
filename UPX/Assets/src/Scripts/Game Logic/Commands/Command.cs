@@ -6,7 +6,13 @@ using UnityEngine;
 
 public class Command : MonoBehaviour
 {
-    [SerializeField] internal Transform playerTransform;
+    internal Transform playerTransform;
+    
+    void Awake()
+    {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+    
     /*
         Código rodado quando este comando estiver na tela.
         Retorna uma boolean para permitir a construção de comandos condicionais.

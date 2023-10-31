@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour
+[CreateAssetMenu()]
+public class LevelManager : ScriptableObject
 {
-    public void LoadLevel()
+    [SerializeField] private int? loadedLevelIndex = null;
+
+    public void LoadLevel(int levelIndex)
     {
-        SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(levelIndex, LoadSceneMode.Additive);
+        loadedLevelIndex = levelIndex;
     }
     public void UnloadLevel()
     {
-        if(SceneManager.GetSceneByBuildIndex(1).isLoaded)
-        {
-            SceneManager.UnloadSceneAsync(1);
-        }
+        if(loadedLevelIndex == null || !SceneManager.GetSceneByBuildIndex(loadedLevelIndex.Value).isLoaded) return;
+
+        SceneManager.UnloadSceneAsync(loadedLevelIndex.Value);
     }
 }

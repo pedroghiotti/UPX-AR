@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /*
@@ -16,6 +17,14 @@ public class CommandManager : MonoBehaviour
 
     public void AddTracked(GameObject obj) { tracked.Add(obj); }
     public void RemoveTracked(GameObject obj) { tracked.Remove(obj); }
+    
+    private bool concludeExecute = false;
+
+    void Start()
+    {
+        FindObjectOfType<LevelGoal>().GetComponent<LevelGoal>().goalReached.AddListener(() => concludeExecute = true);
+    }
+
 
     /*
         A função Execute irá organizar os comandos da esquerda para a direita,
@@ -29,9 +38,6 @@ public class CommandManager : MonoBehaviour
 
         Esse trecho entre colchetes antes do método permite que seja executado do editor,
         através de uma opção no menu contextual nos três pontinhos na extremidade direita do componente.
-
-        TODO: Implementar condição de parada para loop da lógica definida pelo jogador.
-
     */
     [ContextMenu("Execute")]
     public async void Execute()
@@ -46,7 +52,7 @@ public class CommandManager : MonoBehaviour
         Cmd_Queue queue = new();
         queue.Initialize(tracked.OrderBy(obj => obj.transform.position.x).Select(obj => obj.GetComponent<Command>()).ToList());
 
-        while(true) // <- TODO: Implementar condição de parada.
+        while(!concludeExecute)
         {
             if(!Application.isPlaying) break; // Somente relevante para execução no editor.
 
