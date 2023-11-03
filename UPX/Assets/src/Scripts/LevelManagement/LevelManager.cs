@@ -1,22 +1,67 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-[CreateAssetMenu()]
-public class LevelManager : ScriptableObject
+public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private int? loadedLevelIndex = null;
+    private Transform playerTransform;   
+    private int activeLevelIndex = -1;
+    private int currentLevel = -1;
+    [SerializeField] private GameObject[] levels;
 
+    void Awake()
+    {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    public void LoadNext()
+    {
+        UnloadActive();
+        LoadLevel(currentLevel + 1);
+    }
+    public void LoadCurrent()
+    {
+        if(currentLevel < 0) LoadNext();
+        else LoadLevel(currentLevel);
+    }
     public void LoadLevel(int levelIndex)
     {
-        SceneManager.LoadSceneAsync(levelIndex, LoadSceneMode.Additive);
-        loadedLevelIndex = levelIndex;
-    }
-    public void UnloadLevel()
-    {
-        if(loadedLevelIndex == null || !SceneManager.GetSceneByBuildIndex(loadedLevelIndex.Value).isLoaded) return;
+        if(levelIndex < 0 || levelIndex >= levels.Length)
+        {
+            activeLevelIndex = -1;
+            return;
+        }
 
-        SceneManager.UnloadSceneAsync(loadedLevelIndex.Value);
+        levels[levelIndex].SetActive(true);
+        activeLevelIndex = levelIndex;
+        currentLevel = levelIndex;
+
+        SpawnPlayer();
     }
+
+    public void UnloadActive()
+    {
+        UnloadLevel(activeLevelIndex);
+    }
+    public void UnloadLevel(int levelIndex)
+    {
+        if(levelIndex < 0 || levelIndex >= levels.Length) return;
+
+        levels[levelIndex].SetActive(false);
+        activeLevelIndex = -1;
+    }
+
+    private void SpawnPlayer()
+    {
+        Transform spawnPoint = levels[activeLevelIndex].transform.GetChild(0);
+
+        playerTransform.position = spawnPoint.position;
+        playerTransform.rotation = spawnPoint.rotation;
+
+        playerTransform.gameObject.SetActive(true);
+    }
+    
 }

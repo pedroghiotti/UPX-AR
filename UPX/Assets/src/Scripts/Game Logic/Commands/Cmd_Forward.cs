@@ -23,7 +23,7 @@ public class Cmd_Forward : Command
 {
     [Header("Settings - Movement")]
     [SerializeField] private float moveDistance = 5;
-    [SerializeField] private float moveTime = 2;
+    [SerializeField] private float moveTime = 1;
     [SerializeField] private Ease easeMode = Ease.Linear;
 
     public override async Task<bool> Execute()
@@ -37,8 +37,6 @@ public class Cmd_Forward : Command
         while(t < 1)
         {
             t += Time.deltaTime * (1 / moveTime);
-            // playerTransform.position = Vector3.Lerp(stPos, tgPos, t);
-
             await Task.Yield();
         }
 

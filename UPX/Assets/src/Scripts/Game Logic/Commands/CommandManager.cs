@@ -20,11 +20,10 @@ public class CommandManager : MonoBehaviour
     
     private bool concludeExecute = false;
 
-    void Start()
+    void Awake()
     {
-        FindObjectOfType<LevelGoal>().GetComponent<LevelGoal>().goalReached.AddListener(() => concludeExecute = true);
+        FindObjectOfType<Player>().GetComponent<Player>().goalReached.AddListener(() => concludeExecute = true);
     }
-
 
     /*
         A função Execute irá organizar os comandos da esquerda para a direita,
@@ -43,6 +42,7 @@ public class CommandManager : MonoBehaviour
     public async void Execute()
     {
         if(tracked.Count == 0) return;
+        concludeExecute = false;
 
         /*
             Organizo em ordem da esquerda para a direita e busco, 

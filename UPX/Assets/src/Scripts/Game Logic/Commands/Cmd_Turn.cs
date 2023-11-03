@@ -15,7 +15,12 @@ public class Cmd_Turn : Command
 {
     [Header("Settings")]
     [SerializeField] private float rotDistance = 90;
-    [SerializeField] private float rotTime = 2;
+    [SerializeField] private float rotTime = .5f;
+
+    public void setRot(float rot)
+    {
+        rotDistance = rot;
+    }
 
     public override async Task<bool> Execute()
     {
@@ -27,6 +32,9 @@ public class Cmd_Turn : Command
         while(t < 1)
         {
             t += Time.deltaTime * (1 / rotTime);
+
+            if(!playerTransform) break;
+
             rotY = Mathf.Lerp(stRotY, tgRotY, t);
             playerTransform.rotation = Quaternion.Euler(0, rotY, 0);
             await Task.Yield();

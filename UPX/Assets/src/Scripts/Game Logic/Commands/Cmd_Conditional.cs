@@ -28,12 +28,14 @@ public class Cmd_Conditional : Command
 
     internal bool CastForCollision()
     {
+        if(!playerTransform) return false;
         return Physics.Raycast(playerTransform.position, playerTransform.forward, raycastLength, layerMask);
     }
 
     void OnDrawGizmos()
     {
         if(!Application.isPlaying) return;
+        if(!playerTransform) return;
         
         Gizmos.DrawRay(playerTransform.position, playerTransform.forward * raycastLength);
     }
