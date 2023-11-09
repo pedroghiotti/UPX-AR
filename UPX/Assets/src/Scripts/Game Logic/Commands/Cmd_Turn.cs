@@ -24,20 +24,23 @@ public class Cmd_Turn : Command
 
     public override async Task<bool> Execute()
     {
-        float t = 0;
-        float rotY;
-        float stRotY = playerTransform.rotation.eulerAngles.y;
-        float tgRotY = stRotY + rotDistance;
-
-        while(t < 1)
+        for(int i = 0; i < runs; i++)
         {
-            t += Time.deltaTime * (1 / rotTime);
+            float t = 0;
+            float rotY;
+            float stRotY = playerTransform.rotation.eulerAngles.y;
+            float tgRotY = stRotY + rotDistance;
 
-            if(!playerTransform) break;
+            while(t < 1)
+            {
+                t += Time.deltaTime * (1 / rotTime);
 
-            rotY = Mathf.Lerp(stRotY, tgRotY, t);
-            playerTransform.rotation = Quaternion.Euler(0, rotY, 0);
-            await Task.Yield();
+                if(!playerTransform) break;
+
+                rotY = Mathf.Lerp(stRotY, tgRotY, t);
+                playerTransform.rotation = Quaternion.Euler(0, rotY, 0);
+                await Task.Yield();
+            }
         }
 
         return true;

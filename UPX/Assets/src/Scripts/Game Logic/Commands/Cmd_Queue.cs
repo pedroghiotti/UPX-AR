@@ -22,10 +22,13 @@ public class Cmd_Queue : Command
 
     public override async Task<bool> Execute()
     {
-        for(int i = 0; i < queue.Count; i++)
+        for(int i = 0; i < runs; i++)
         {
-            bool response = await queue[i].Execute();
-            if(!response) i++;
+            for(int j = 0; j < queue.Count; j++)
+            {
+                bool response = await queue[j].Execute();
+                if(!response) j++;
+            }
         }
 
         return true;

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 /*
     Classe responsável por manter uma lista atualizada dos objetos trackeados pelo vuforia
@@ -17,12 +18,16 @@ public class CommandManager : MonoBehaviour
 
     public void AddTracked(GameObject obj) { tracked.Add(obj); }
     public void RemoveTracked(GameObject obj) { tracked.Remove(obj); }
-    
+
+    public UnityEvent onStartExecute = new();
+    public UnityEvent onConcludeExecute = new();
+
     private bool concludeExecute = false;
 
     void Awake()
     {
-        FindObjectOfType<Player>().GetComponent<Player>().goalReached.AddListener(() => concludeExecute = true);
+        FindObjectOfType<Player>().GetComponent<Player>().goalReached.AddListener(() => onConcludeExecute.Invoke());
+        onConcludeExecute.AddListener(() => concludeExecute = true);
     }
 
     /*
@@ -44,6 +49,8 @@ public class CommandManager : MonoBehaviour
         if(tracked.Count == 0) return;
         concludeExecute = false;
 
+        onStartExecute.Invoke();
+
         /*
             Organizo em ordem da esquerda para a direita e busco, 
             nos gameobjects, os componentes dos comandos.
@@ -52,13 +59,20 @@ public class CommandManager : MonoBehaviour
         Cmd_Queue queue = new();
         queue.Initialize(tracked.OrderBy(obj => obj.transform.position.x).Select(obj => obj.GetComponent<Command>()).ToList());
 
-        while(!concludeExecute)
+        do
         {
             if(!Application.isPlaying) break; // Somente relevante para execução no editor.
 
             await queue.Execute();
 
             await Task.Yield();
-        }
+        } 
+        while(/*!concludeExecute*/ false);
+    }
+
+    void OnDestroy()
+    {
+        onStartExecute.RemoveAllListeners();
+        onConcludeExecute.RemoveAllListeners();
     }
 }

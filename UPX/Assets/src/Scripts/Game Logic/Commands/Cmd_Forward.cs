@@ -28,16 +28,19 @@ public class Cmd_Forward : Command
 
     public override async Task<bool> Execute()
     {
-        float t = 0;
-        Vector3 stPos = playerTransform.position;
-        Vector3 tgPos = stPos + playerTransform.forward * moveDistance;
-
-        playerTransform.DOMove(tgPos, moveTime).SetEase(easeMode);
-        
-        while(t < 1)
+        for(int i = 0; i < runs; i++)
         {
-            t += Time.deltaTime * (1 / moveTime);
-            await Task.Yield();
+            float t = 0;
+            Vector3 stPos = playerTransform.position;
+            Vector3 tgPos = stPos + playerTransform.forward * moveDistance;
+
+            playerTransform.DOMove(tgPos, moveTime).SetEase(easeMode);
+            
+            while(t < 1)
+            {
+                t += Time.deltaTime * (1 / moveTime);
+                await Task.Yield();
+            }
         }
 
         return true;

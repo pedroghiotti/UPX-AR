@@ -6,11 +6,21 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 public class Command : MonoBehaviour
 {
     [SerializeField] internal Transform playerTransform;
     private Button executeButton;
+
+    internal int runs = 1;
+    private int maxRuns = 3;
+
+    public void incrementRuns(TMP_Text textBox)
+    {
+        runs = runs >= maxRuns ? 1 : runs + 1;
+        textBox.text = $"X{runs}";
+    }
     
     void Awake()
     {
