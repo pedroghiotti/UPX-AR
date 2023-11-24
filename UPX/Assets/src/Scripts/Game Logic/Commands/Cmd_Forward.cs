@@ -26,23 +26,20 @@ public class Cmd_Forward : Command
     [SerializeField] private float moveTime = 1;
     [SerializeField] private Ease easeMode = Ease.Linear;
 
-    public override async Task<bool> Execute()
+    public override async Task<int> Execute()
     {
-        for(int i = 0; i < runs; i++)
-        {
-            float t = 0;
-            Vector3 stPos = playerTransform.position;
-            Vector3 tgPos = stPos + playerTransform.forward * moveDistance;
+        float t = 0;
+        Vector3 stPos = playerTransform.position;
+        Vector3 tgPos = stPos + playerTransform.forward * moveDistance;
 
-            playerTransform.DOMove(tgPos, moveTime).SetEase(easeMode);
-            
-            while(t < 1)
-            {
-                t += Time.deltaTime * (1 / moveTime);
-                await Task.Yield();
-            }
+        playerTransform.DOMove(tgPos, moveTime).SetEase(easeMode);
+        
+        while(t < 1)
+        {
+            t += Time.deltaTime * (1 / moveTime);
+            await Task.Yield();
         }
 
-        return true;
+        return 0;
     }
 }

@@ -19,11 +19,17 @@ public class Cmd_Conditional : Command
     [Header("Settings")]
     [SerializeField] private float raycastLength = 5;
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private bool runNextIf = true;
+    [SerializeField] private bool flip = true;
 
-    public override async Task<bool> Execute()
+    public override async Task<int> Execute()
     {
-        return CastForCollision() == runNextIf;
+        await Task.Yield();
+
+        bool collisionFound = CastForCollision();
+
+        if(collisionFound == flip) return 0;
+        else return 1;
+        
     }
 
     internal bool CastForCollision()

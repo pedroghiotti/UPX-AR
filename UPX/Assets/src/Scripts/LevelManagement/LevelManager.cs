@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
 {
     private Transform playerTransform;   
     private int activeLevelIndex = -1;
-    private int currentLevel = -1;
+    public int currentLevel = -1;
     [SerializeField] private GameObject[] levels;
 
     void Awake()

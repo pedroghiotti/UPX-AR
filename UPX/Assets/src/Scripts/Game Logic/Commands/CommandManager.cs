@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SocialPlatforms.Impl;
 
 /*
     Classe responsável por manter uma lista atualizada dos objetos trackeados pelo vuforia
@@ -15,6 +16,7 @@ using UnityEngine.Events;
 public class CommandManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> tracked = new List<GameObject>();
+    public Queue queue; 
 
     public void AddTracked(GameObject obj) { tracked.Add(obj); }
     public void RemoveTracked(GameObject obj) { tracked.Remove(obj); }
@@ -24,9 +26,13 @@ public class CommandManager : MonoBehaviour
 
     private bool concludeExecute = false;
 
+    public int scoreDeductor;
+
     void Awake()
     {
-        FindObjectOfType<Player>().GetComponent<Player>().goalReached.AddListener(() => onConcludeExecute.Invoke());
+        Player player = FindObjectOfType<Player>();
+
+        player.goalReached.AddListener(() => onConcludeExecute.Invoke());
         onConcludeExecute.AddListener(() => concludeExecute = true);
     }
 
@@ -47,27 +53,33 @@ public class CommandManager : MonoBehaviour
     public async void Execute()
     {
         if(tracked.Count == 0) return;
+
         concludeExecute = false;
 
         onStartExecute.Invoke();
+
+        scoreDeductor = tracked.Count;
 
         /*
             Organizo em ordem da esquerda para a direita e busco, 
             nos gameobjects, os componentes dos comandos.
         */
 
-        Cmd_Queue queue = new();
-        queue.Initialize(tracked.OrderBy(obj => obj.transform.position.x).Select(obj => obj.GetComponent<Command>()).ToList());
+        queue = new(tracked.OrderBy(obj => obj.transform.position.x).Select(obj => obj.GetComponent<Command>()).ToList());
 
+        bool firstRunDone = false;
         do
         {
+            if(!firstRunDone) firstRunDone = true;
+            else scoreDeductor++;
+
             if(!Application.isPlaying) break; // Somente relevante para execução no editor.
 
-            await queue.Execute();
+            await queue.Execute("Command Manager");
 
             await Task.Yield();
         } 
-        while(/*!concludeExecute*/ false);
+        while(!concludeExecute);
     }
 
     void OnDestroy()

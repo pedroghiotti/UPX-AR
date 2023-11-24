@@ -7,26 +7,19 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class Command : MonoBehaviour
 {
-    [SerializeField] internal Transform playerTransform;
-    private Button executeButton;
+    internal Transform playerTransform;
 
-    internal int runs = 1;
-    private int maxRuns = 3;
+    [SerializeField] private Button executeButton;
 
-    public void incrementRuns(TMP_Text textBox)
-    {
-        runs = runs >= maxRuns ? 1 : runs + 1;
-        textBox.text = $"X{runs}";
-    }
-    
     void Awake()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
-        executeButton = GameObject.FindWithTag("Execute").GetComponent<Button>();
+        // executeButton = GameObject.FindWithTag("Execute").GetComponent<Button>();
 
         Button[] buttons = GetComponentsInChildren<Button>();
 
@@ -42,8 +35,9 @@ public class Command : MonoBehaviour
         Código rodado quando este comando estiver na tela.
         Retorna uma boolean para permitir a construção de comandos condicionais.
     */
-    public async virtual Task<bool> Execute()
+    public async virtual Task<int> Execute()
     {
-        return true;
+        await Task.Yield();
+        return 0;
     }
 }
